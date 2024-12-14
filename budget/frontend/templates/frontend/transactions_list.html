@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Transactions</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+    <h1 class="text-3xl font-bold text-blue-500">Test Tailwind CSS</h1>
+    <!-- Main Container -->
+    <div class="min-h-screen flex items-center justify-center">
+        <!-- Content Card -->
+        <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-lg p-8 max-w-4xl w-full border border-gray-200">
+            <h1 class="text-3xl font-bold text-gray-800 text-center mb-6">
+                Liste des Transactions
+            </h1>
+
+            <!-- Add Transaction Button -->
+            <div class="mb-10 text-right">
+                <a href="{% url 'ajouter_transaction' %}" class="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                    Ajouter une Transaction
+                </a>
+            </div>
+
+            <!-- Transactions Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left bg-white rounded-lg shadow-md">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="px-4 py-2 text-gray-700 font-medium">Nom</th>
+                            <th class="px-4 py-2 text-gray-700 font-medium">Commentaire</th>
+                            <th class="px-4 py-2 text-gray-700 font-medium">Date</th>
+                            <th class="px-4 py-2 text-gray-700 font-medium">Montant</th>
+                            <th class="px-4 py-2 text-gray-700 font-medium">Devise</th>
+                            <th class="px-4 py-2 text-gray-700 font-medium">Solde</th>
+                            <th class="px-4 py-2 text-gray-700 font-medium">Récurrente</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for transaction in transactions %}
+                        <tr class="border-b border-gray-200">
+                            <td class="px-4 py-2 text-gray-800">{{ transaction.nom }}</td>
+                            <td class="px-4 py-2 text-gray-600">{{ transaction.commentaire }}</td>
+                            <td class="px-4 py-2 text-gray-600">{{ transaction.date|date:"d-m-Y" }}</td>
+                            <td class="px-4 py-2 text-gray-800">{{ transaction.montant }}</td>
+                            <td class="px-4 py-2 text-gray-600">{{ transaction.devise }}</td>
+                            <td class="px-4 py-2">
+                                {% if transaction.solde == 'CREDIT' %}
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-lg">Credit</span>
+                                {% else %}
+                                <span class="px-2 py-1 bg-red-100 text-red-800 rounded-lg">Debit</span>
+                                {% endif %}
+                            </td>
+                            <td class="px-4 py-2">
+                                {% if transaction.recurrente %}
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-lg">Oui</span>
+                                {% else %}
+                                <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-lg">Non</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="7" class="px-4 py-2 text-center text-gray-600">Aucune transaction disponible</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
