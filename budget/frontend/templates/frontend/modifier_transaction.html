@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier une Transaction</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+    <div class="min-h-screen flex items-center justify-center">
+        <!-- Form Card -->
+        <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-lg p-10 max-w-lg w-full border border-gray-200">
+            <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">
+                Modifier la Transaction
+            </h1>
+
+            <!-- Form -->
+            <form method="post">
+                {% csrf_token %}
+                
+                <!-- Nom -->
+                <div class="mb-4">
+                    <label for="nom" class="block text-sm font-medium text-gray-700">Nom</label>
+                    <input type="text" id="nom" name="nom" value="{{ transaction.nom }}" class="w-full bg-gray-50 border border-gray-300 text-gray-700 rounded-lg shadow-inner p-3 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                </div>
+
+                <!-- Commentaire -->
+                <div class="mb-4">
+                    <label for="commentaire" class="block text-sm font-medium text-gray-700">Commentaire</label>
+                    <textarea id="commentaire" name="commentaire" rows="3" class="w-full bg-gray-50 border border-gray-300 text-gray-700 rounded-lg shadow-inner p-3 focus:outline-none focus:ring-2 focus:ring-blue-300">{{ transaction.commentaire }}</textarea>
+                </div>
+
+                <!-- Date -->
+                <div class="mb-4">
+                    <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+                    <input type="date" id="date" name="date" value="{{ transaction.date|date:"Y-m-d" }}" class="w-full bg-gray-50 border border-gray-300 text-gray-700 rounded-lg shadow-inner p-3 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                </div>
+
+                <!-- Montant -->
+                <div class="mb-4">
+                    <label for="montant" class="block text-sm font-medium text-gray-700">Montant (€)</label>
+                    <input type="number" step="0.01" id="montant" name="montant" value="{{ transaction.montant }}" class="w-full bg-gray-50 border border-gray-300 text-gray-700 rounded-lg shadow-inner p-3 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                </div>
+
+                <!-- Devise -->
+                <div class="mb-4">
+                    <label for="devise" class="block text-sm font-medium text-gray-700">Devise</label>
+                    <select id="devise" name="devise" class="w-full bg-gray-50 border border-gray-300 text-gray-700 rounded-lg shadow-inner p-3 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        <option value="EURO" {% if transaction.devise == 'EURO' %}selected{% endif %}>Euro</option>
+                        <option value="PLN" {% if transaction.devise == 'PLN' %}selected{% endif %}>Polish Zloty</option>
+                        <option value="USD" {% if transaction.devise == 'USD' %}selected{% endif %}>US Dollar</option>
+                    </select>
+                </div>
+
+                <!-- Solde -->
+                <div class="mb-4">
+                    <label for="solde" class="block text-sm font-medium text-gray-700">Solde</label>
+                    <select id="solde" name="solde" class="w-full bg-gray-50 border border-gray-300 text-gray-700 rounded-lg shadow-inner p-3 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        <option value="CREDIT" {% if transaction.solde == 'CREDIT' %}selected{% endif %}>Credit</option>
+                        <option value="DEBIT" {% if transaction.solde == 'DEBIT' %}selected{% endif %}>Debit</option>
+                    </select>
+                </div>
+
+                <!-- Récurrente -->
+                <div class="mb-4 flex items-center">
+                    <input type="checkbox" id="recurrente" name="recurrente" {% if transaction.recurrente %}checked{% endif %} class="rounded focus:ring-2 focus:ring-blue-300">
+                    <label for="recurrente" class="ml-2 text-sm font-medium text-gray-700">Transaction récurrente</label>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                    Modifier Transaction
+                </button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -10,23 +10,24 @@
 <body class="bg-gray-100 text-gray-800 font-sans">
 
     <!-- Main Container -->
-    <div class="min-h-screen flex items-center justify-center">
+    <div class="min-h-screen flex items-center justify-center px-4">
         <!-- Content Card -->
-        <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-lg p-8 max-w-4xl w-full border border-gray-200">
+        <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-lg p-8 max-w-6xl w-full border border-gray-200">
             <h1 class="text-3xl font-bold text-gray-800 text-center mb-6">
                 Liste des Transactions
             </h1>
 
             <!-- Add Transaction Button -->
             <div class="mb-10 text-right">
-                <a href="{% url 'ajouter_transaction' %}" class="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                <a href="{% url 'ajouter_transaction' %}" 
+                   class="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
                     Ajouter une Transaction
                 </a>
             </div>
 
             <!-- Transactions Table -->
             <div class="overflow-x-auto">
-                <table class="w-full text-left bg-white rounded-lg shadow-md">
+                <table class="w-full table-auto text-left bg-white rounded-lg shadow-md">
                     <thead class="bg-gray-200">
                         <tr>
                             <th class="px-4 py-2 text-gray-700 font-medium">Nom</th>
@@ -62,10 +63,18 @@
                                 {% endif %}
                             </td>
                             <td class="px-4 py-2 text-center">
-                                <a href="{% url 'supprimer_transaction' transaction.id %}" 
-                                   class="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300">
-                                    Supprimer
-                                </a>
+                                <div class="flex justify-center space-x-2">
+                                    <!-- Bouton Modifier -->
+                                    <a href="{% url 'modifier_transaction' transaction.id %}" 
+                                       class="px-4 py-2 bg-yellow-500 text-white font-semibold rounded-lg shadow hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                                        Modifier
+                                    </a>
+                                    <!-- Bouton Supprimer -->
+                                    <a href="{% url 'supprimer_transaction' transaction.id %}" 
+                                       class="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300">
+                                        Supprimer
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                         {% empty %}
