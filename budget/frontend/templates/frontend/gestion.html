@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion Budget</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-semibold text-gray-900">Gestion Budget</h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="/" class="text-gray-700 hover:text-gray-900">Accueil</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-gray-900">Statistiques</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-gray-900">Déconnexion</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-10">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Gestion de votre Budget</h2>
+        
+        <!-- Budget Overview -->
+        <section class="bg-white shadow rounded-lg p-6 mb-10">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800">Solde actuel</h3>
+                    <p class="text-2xl font-bold text-green-500">€ 1,200.00</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800">Dépenses totales</h3>
+                    <p class="text-2xl font-bold text-red-500">€ 450.00</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800">Revenus totaux</h3>
+                    <p class="text-2xl font-bold text-blue-500">€ 1,650.00</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add New Transaction -->
+        <section class="bg-white shadow rounded-lg p-6 mb-10">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Ajouter une nouvelle transaction</h3>
+            <form class="space-y-4">
+                <div>
+                    <label for="transactionType" class="block text-sm font-medium text-gray-700">Type</label>
+                    <select id="transactionType" name="transactionType" class="w-full border-gray-300 rounded-lg shadow-sm">
+                        <option value="income">Revenu</option>
+                        <option value="expense">Dépense</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="amount" class="block text-sm font-medium text-gray-700">Montant</label>
+                    <input type="number" id="amount" name="amount" class="w-full border-gray-300 rounded-lg shadow-sm" placeholder="€">
+                </div>
+                <div>
+                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <input type="text" id="description" name="description" class="w-full border-gray-300 rounded-lg shadow-sm" placeholder="Description de la transaction">
+                </div>
+                <button type="submit" class="w-full px-6 py-3 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600">
+                    Ajouter
+                </button>
+            </form>
+        </section>
+
+        <!-- Transactions List -->
+        <section class="bg-white shadow rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Liste des Transactions</h3>
+            <table class="w-full table-auto">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="text-left px-4 py-2">Type</th>
+                        <th class="text-left px-4 py-2">Montant</th>
+                        <th class="text-left px-4 py-2">Description</th>
+                        <th class="text-left px-4 py-2">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="px-4 py-2 text-green-500">Revenu</td>
+                        <td class="px-4 py-2">€ 500.00</td>
+                        <td class="px-4 py-2">Salaire</td>
+                        <td class="px-4 py-2">13/12/2024</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2 text-red-500">Dépense</td>
+                        <td class="px-4 py-2">€ 50.00</td>
+                        <td class="px-4 py-2">Courses</td>
+                        <td class="px-4 py-2">12/12/2024</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 Budget App. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
