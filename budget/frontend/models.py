@@ -20,6 +20,7 @@ class Transaction(models.Model):
     montant = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Montant")
     devise = models.CharField(max_length=4, choices=DEVISE_CHOICES, verbose_name="Devise")
     solde = models.CharField(max_length=6, choices=SOLDE_CHOICES, verbose_name="Solde")
+    recurrente = models.BooleanField(default=False, verbose_name="Transaction récurrente")
 
     def __str__(self):
         return f"{self.nom} - {self.montant} {self.devise} ({self.solde})"
