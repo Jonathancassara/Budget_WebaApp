@@ -1,7 +1,7 @@
 # frontend/views.py
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Transaction
-from datetime import datetime
+from datetime import datetime,date
 
 def index(request):
     return render(request, 'frontend/index.html')
